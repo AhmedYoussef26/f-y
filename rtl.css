@@ -1,0 +1,93 @@
+/* Arabic / right-to-left layer. Loaded after styles.css on /ar/ only. */
+
+:root {
+  --serif: "Markazi Text", "Amiri", "Times New Roman", serif;
+  --sans: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --mono: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif; /* labels: Arabic has no mono voice */
+  --num: "Geist Mono", ui-monospace, Menlo, monospace;
+}
+
+/* Arabic script must never be letter-spaced (it breaks the joins) or slanted. */
+* { letter-spacing: 0 !important; }
+em, blockquote, .quote blockquote { font-style: normal; }
+body { line-height: 1.8; }
+
+/* Numerals and Latin fragments keep the mono voice */
+.l-num, .count b, .calc__label output, .nav__tel, .acc__n, .sector-list li span,
+.mobile-menu__foot, .footer__base, [dir="ltr"] { font-family: var(--num); }
+.brand__text b, .hero__facts dd.txt, .tnote__n[dir="ltr"], .integra h3 [dir="ltr"], .clients ul, .person__cred [dir="ltr"] { font-family: "Instrument Serif", "Times New Roman", serif; }
+.details a[dir="ltr"], .footer__grid a[dir="ltr"], .footer__grid span[dir="ltr"], .form__done a, .nav__lang { font-family: "Geist", var(--sans); }
+[dir="ltr"] { unicode-bidi: isolate; }
+.brand__text span { white-space: nowrap; }
+
+/* Type scale: Markazi Text runs small and needs air for marks above and below */
+.eyebrow, .tcard__k, .hero__facts dt, .person__role, .value__k, .clients__k, .details dt, .footer h4, .count span, .chip-float__k, .ledger__head, .ledger__foot, .marquee__track span, .quote figcaption span, .details small, .open { font-size: 14px; font-weight: 500; }
+.brand__text span { font-size: 11.5px; }
+.hero__title { font-size: clamp(3.4rem, 7.4vw, 6.6rem); line-height: .92; font-weight: 500; }
+.line { padding-block: .1em; margin-block: -.1em; }
+.h2 { font-size: clamp(2.6rem, 5vw, 4.4rem); line-height: 1.16; font-weight: 500; }
+.statement { font-size: clamp(2.3rem, 5vw, 4.6rem); line-height: 1.28; }
+.acc__t { font-size: clamp(2.1rem, 3.6vw, 3rem); line-height: 1.25; }
+.sector-list li { font-size: clamp(1.8rem, 2.8vw, 2.5rem); line-height: 1.3; }
+.quote blockquote { font-size: clamp(1.9rem, 3.3vw, 2.9rem); line-height: 1.45; }
+.person h3 { font-size: 2rem; } .person--lead h3 { font-size: clamp(2.3rem, 3.3vw, 3rem); }
+.integra h3 { font-size: 2rem; } .form__title { font-size: 2.3rem; } .form__done h3 { font-size: 2.2rem; }
+.hero__facts dd { font-size: 2.2rem; } .tcard__date { font-size: clamp(2.4rem, 4vw, 3.5rem); }
+.mobile-menu nav a { font-size: 2.6rem; line-height: 1.3; }
+.person__mono { font-size: 2rem; padding-bottom: .2em; } .person--lead .person__mono { font-size: 3rem; }
+.footer__track span { font-size: clamp(3.2rem, 7vw, 6.4rem); line-height: 1.3; }
+.footer__track em { color: var(--teal); -webkit-text-stroke: 0; } /* outlined text shows seams on joined letters */
+.tnote h3, .pills span, .tags li, .btn { font-weight: 500; }
+.ledger__stamp { font-size: 13px; }
+
+/* Mirrored geometry */
+.progress { transform-origin: 100% 50%; }
+.skip { left: auto; right: 16px; }
+.nav { padding: 10px 20px 10px 12px; }
+.hero::before { background: radial-gradient(60% 55% at 22% 38%, rgba(117, 207, 223, .16), transparent 70%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); }
+.hero::after { -webkit-mask-image: radial-gradient(70% 70% at 30% 40%, #000 0%, transparent 75%); mask-image: radial-gradient(70% 70% at 30% 40%, #000 0%, transparent 75%); }
+.hero__facts > div { padding: 18px 0 0 28px; margin-right: 0; margin-left: 28px; border-right: 0; border-left: 1px solid var(--line-light); }
+.hero__facts > div:last-child { border-left: 0; margin-left: 0; }
+.seal { right: auto; left: -40px; }
+.chip-float { left: auto; right: -42px; }
+.chip-float__v b { margin-right: 0; margin-left: 4px; font-family: "Instrument Serif", serif; }
+.hero__facts dd span[data-count], .tnote__n, .calc__out b { font-family: "Instrument Serif", "Times New Roman", serif; }
+.l-bar i, .count__bar i { transform-origin: 100% 50%; }
+.l-num { text-align: left; direction: ltr; }
+.range::-webkit-slider-runnable-track { background: linear-gradient(270deg, var(--teal) var(--p, 8%), rgba(255, 255, 255, .14) var(--p, 8%)); }
+
+/* Marquees travel the other way */
+.marquee__track, .footer__track { animation-name: drift-rtl; }
+@keyframes drift-rtl { to { transform: translate3d(50%, 0, 0); } }
+
+/* Arrows point with the reading direction */
+.btn svg, .link-arrow svg { transform: scaleX(-1); }
+@media (hover: hover) {
+  .btn:hover svg { transform: translateX(-4px) scaleX(-1); }
+  .link-arrow:hover svg { transform: translateX(-5px) scaleX(-1); }
+  .acc__btn:hover .acc__t { transform: translateX(-8px); }
+  .sector-list li:hover { padding-left: 0; padding-right: 10px; }
+}
+
+.acc__btn { text-align: right; }
+.acc__inner { padding-left: 0; padding-right: 68px; }
+.quote { padding-left: 0; padding-right: clamp(0px, 14vw, 220px); }
+.quote__mark { transform: scaleX(-1); }
+.open { margin-left: 0; margin-right: 6px; }
+.details a { background-position: 100% 100%; }
+.field input[dir="ltr"] { text-align: left; }
+
+@media (max-width: 1100px) {
+  .chip-float { right: -12px; }
+  .seal { left: -8px; }
+}
+@media (max-width: 900px) {
+  .seal { left: 4px; right: auto; }
+  .chip-float { right: auto; left: 12px; }
+  .quote { padding-right: 0; }
+}
+@media (max-width: 620px) {
+  .nav { padding-right: 16px; }
+  .hero__facts > div { border-left: 0; margin-left: 0; padding-left: 12px; }
+  .acc__inner { padding-right: 0; }
+}
